@@ -19,7 +19,9 @@ function NotFound() {
     >
       <section>
         <p style={{ margin: 0, fontSize: "3rem", fontWeight: 800 }}>404</p>
-        <h1 style={{ margin: "12px 0 8px", fontSize: "2rem" }}>Page Not Found</h1>
+        <h1 style={{ margin: "12px 0 8px", fontSize: "2rem" }}>
+          Page Not Found
+        </h1>
         <button
           type="button"
           onClick={() => navigate("/")}

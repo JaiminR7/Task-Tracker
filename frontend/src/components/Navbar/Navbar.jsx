@@ -1,9 +1,12 @@
-import './Navbar.css';
+import "./Navbar.css";
 
 function Navbar() {
   return (
     <header className="navbar">
-      <div className="navbar__brand" aria-label="Task Tracker application logo and name">
+      <div
+        className="navbar__brand"
+        aria-label="Task Tracker application logo and name"
+      >
         <div className="navbar__logo" aria-hidden="true">
           TT
         </div>
@@ -14,7 +17,11 @@ function Navbar() {
       </div>
 
       <div className="navbar__actions">
-        <button type="button" className="navbar__toggle" aria-label="Dark mode toggle placeholder">
+        <button
+          type="button"
+          className="navbar__toggle"
+          aria-label="Dark mode toggle placeholder"
+        >
           <span aria-hidden="true">◐</span>
           <span>Dark Mode</span>
         </button>

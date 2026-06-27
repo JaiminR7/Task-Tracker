@@ -1,5 +1,5 @@
-import './DashboardLayout.css';
-import Navbar from '../Navbar/Navbar';
+import "./DashboardLayout.css";
+import Navbar from "../Navbar/Navbar";
 
 function DashboardLayout() {
   return (
@@ -14,12 +14,18 @@ function DashboardLayout() {
             <p>Welcome back. Your workspace is ready for task management.</p>
           </div>
 
-          <button type="button" className="btn btn-primary dashboard-header__button">
+          <button
+            type="button"
+            className="btn btn-primary dashboard-header__button"
+          >
             Create Task
           </button>
         </section>
 
-        <section className="dashboard-stats" aria-label="Task statistics placeholders">
+        <section
+          className="dashboard-stats"
+          aria-label="Task statistics placeholders"
+        >
           <article className="card card-soft stat-card">
             <small>Total Tasks</small>
             <strong>--</strong>
@@ -64,7 +70,12 @@ function DashboardLayout() {
               <label className="sr-only" htmlFor="status-filter">
                 Filter by status
               </label>
-              <select id="status-filter" className="select" disabled defaultValue="all">
+              <select
+                id="status-filter"
+                className="select"
+                disabled
+                defaultValue="all"
+              >
                 <option value="all">All Status</option>
               </select>
             </div>
@@ -73,7 +84,12 @@ function DashboardLayout() {
               <label className="sr-only" htmlFor="priority-filter">
                 Filter by priority
               </label>
-              <select id="priority-filter" className="select" disabled defaultValue="all">
+              <select
+                id="priority-filter"
+                className="select"
+                disabled
+                defaultValue="all"
+              >
                 <option value="all">All Priority</option>
               </select>
             </div>
@@ -82,14 +98,22 @@ function DashboardLayout() {
               <label className="sr-only" htmlFor="sort-tasks">
                 Sort tasks
               </label>
-              <select id="sort-tasks" className="select" disabled defaultValue="recent">
+              <select
+                id="sort-tasks"
+                className="select"
+                disabled
+                defaultValue="recent"
+              >
                 <option value="recent">Newest First</option>
               </select>
             </div>
           </div>
         </section>
 
-        <section className="dashboard-panel card task-list-placeholder" aria-label="Task list placeholder">
+        <section
+          className="dashboard-panel card task-list-placeholder"
+          aria-label="Task list placeholder"
+        >
           <p>Tasks will appear here.</p>
         </section>
       </main>
