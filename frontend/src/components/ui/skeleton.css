@@ -1,0 +1,14 @@
+.shadcn-skeleton {
+  animation: shadcn-skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: var(--border, #cbd5e1);
+  border-radius: var(--radius-sm, 6px);
+}
+
+@keyframes shadcn-skeleton-pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}

@@ -140,3 +140,14 @@
     justify-content: center;
   }
 }
+
+/* ========================================
+   Dark Mode Overrides
+   ======================================== */
+.dark .navbar__user {
+  background: var(--background);
+}
+
+.dark .navbar__toggle:hover {
+  border-color: #334155;
+}

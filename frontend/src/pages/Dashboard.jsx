@@ -2,10 +2,14 @@ import { useEffect, useState, useMemo } from "react";
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import TaskCard from "../components/TaskCard/TaskCard";
+import TaskCardSkeleton from "../components/TaskCard/TaskCardSkeleton";
 import TaskForm from "../components/TaskForm/TaskForm";
 import Modal from "../components/Modal/Modal";
 import Button from "../components/Button/Button";
 import { getTasks, deleteTask } from "../services/taskService";
+import DashboardEmptyState from "../components/DashboardStates/DashboardEmptyState";
+import DashboardSearchEmptyState from "../components/DashboardStates/DashboardSearchEmptyState";
+import DashboardErrorState from "../components/DashboardStates/DashboardErrorState";
 
 function Dashboard() {
   const [tasks, setTasks] = useState([]);
@@ -167,36 +171,42 @@ function Dashboard() {
         onPriorityChange={(e) => setPriorityFilter(e.target.value)}
         sortBy={sortBy}
         onSortChange={(e) => setSortBy(e.target.value)}
+        loading={loading}
       >
-        <section
-          className="card"
-          style={{
-            display: "grid",
-            gap: "1rem",
-          }}
-        >
-          {loading ? (
-            <Loader />
-          ) : error ? (
-            <div
-              role="alert"
-              style={{ color: "var(--color-danger)", fontWeight: 600 }}
-            >
-              {error}
-            </div>
-          ) : displayedTasks.length === 0 ? (
+        {loading ? (
+          <section
+            className="card"
+            style={{
+              display: "grid",
+              gap: "1rem",
+            }}
+          >
             <div
               style={{
                 display: "grid",
-                gap: "0.5rem",
-                placeItems: "center",
-                textAlign: "center",
+                gap: "1rem",
+                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
               }}
             >
-              <h3>No matching tasks found.</h3>
-              <p>Task cards will appear here once matching data is available.</p>
+              <TaskCardSkeleton />
+              <TaskCardSkeleton />
+              <TaskCardSkeleton />
             </div>
-          ) : (
+          </section>
+        ) : error ? (
+          <DashboardErrorState onRetry={() => fetchTasks(true)} />
+        ) : tasks.length === 0 ? (
+          <DashboardEmptyState onCreateTask={handleCreateClick} />
+        ) : displayedTasks.length === 0 ? (
+          <DashboardSearchEmptyState />
+        ) : (
+          <section
+            className="card"
+            style={{
+              display: "grid",
+              gap: "1rem",
+            }}
+          >
             <div
               style={{
                 display: "grid",
@@ -217,8 +227,8 @@ function Dashboard() {
                 />
               ))}
             </div>
-          )}
-        </section>
+          </section>
+        )}
       </DashboardLayout>
 
       <TaskForm
@@ -270,20 +280,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-function Loader() {
-  return (
-    <div
-      aria-live="polite"
-      style={{
-        display: "grid",
-        placeItems: "center",
-        minHeight: "160px",
-        color: "var(--text-secondary)",
-        fontWeight: 600,
-      }}
-    >
-      Loading tasks...
-    </div>
-  );
-}

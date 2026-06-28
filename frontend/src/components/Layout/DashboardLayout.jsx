@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { ClipboardList, CheckCircle2, Clock3, LoaderCircle, AlertTriangle } from "lucide-react";
 import { Input } from "../ui/input";
 import { Select } from "../ui/select";
+import { Skeleton } from "../ui/skeleton";
 
 function DashboardLayout({
   onCreateTask,
@@ -16,6 +17,7 @@ function DashboardLayout({
   onPriorityChange,
   sortBy = "newest",
   onSortChange,
+  loading = false,
   children,
 }) {
   const totalTasks = tasks.length;
@@ -57,8 +59,17 @@ function DashboardLayout({
               </div>
             </CardHeader>
             <CardContent>
-              <strong className="stat-card__value">{totalTasks}</strong>
-              <small className="stat-card__description">All tasks in workspace</small>
+              {loading ? (
+                <div style={{ display: "grid", gap: "0.25rem" }}>
+                  <Skeleton style={{ height: "2.4rem", width: "3.5rem" }} />
+                  <Skeleton style={{ height: "0.75rem", width: "6rem", marginTop: "0.25rem" }} />
+                </div>
+              ) : (
+                <>
+                  <strong className="stat-card__value">{totalTasks}</strong>
+                  <small className="stat-card__description">All tasks in workspace</small>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -70,8 +81,17 @@ function DashboardLayout({
               </div>
             </CardHeader>
             <CardContent>
-              <strong className="stat-card__value">{completedTasks}</strong>
-              <small className="stat-card__description">Finished tasks</small>
+              {loading ? (
+                <div style={{ display: "grid", gap: "0.25rem" }}>
+                  <Skeleton style={{ height: "2.4rem", width: "3rem" }} />
+                  <Skeleton style={{ height: "0.75rem", width: "5rem", marginTop: "0.25rem" }} />
+                </div>
+              ) : (
+                <>
+                  <strong className="stat-card__value">{completedTasks}</strong>
+                  <small className="stat-card__description">Finished tasks</small>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -83,8 +103,17 @@ function DashboardLayout({
               </div>
             </CardHeader>
             <CardContent>
-              <strong className="stat-card__value">{pendingTasks}</strong>
-              <small className="stat-card__description">Tasks waiting to start</small>
+              {loading ? (
+                <div style={{ display: "grid", gap: "0.25rem" }}>
+                  <Skeleton style={{ height: "2.4rem", width: "3rem" }} />
+                  <Skeleton style={{ height: "0.75rem", width: "6.5rem", marginTop: "0.25rem" }} />
+                </div>
+              ) : (
+                <>
+                  <strong className="stat-card__value">{pendingTasks}</strong>
+                  <small className="stat-card__description">Tasks waiting to start</small>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -96,8 +125,17 @@ function DashboardLayout({
               </div>
             </CardHeader>
             <CardContent>
-              <strong className="stat-card__value">{inProgressTasks}</strong>
-              <small className="stat-card__description">Tasks currently active</small>
+              {loading ? (
+                <div style={{ display: "grid", gap: "0.25rem" }}>
+                  <Skeleton style={{ height: "2.4rem", width: "3rem" }} />
+                  <Skeleton style={{ height: "0.75rem", width: "6rem", marginTop: "0.25rem" }} />
+                </div>
+              ) : (
+                <>
+                  <strong className="stat-card__value">{inProgressTasks}</strong>
+                  <small className="stat-card__description">Tasks currently active</small>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -109,8 +147,17 @@ function DashboardLayout({
               </div>
             </CardHeader>
             <CardContent>
-              <strong className="stat-card__value">{highPriorityTasks}</strong>
-              <small className="stat-card__description">Urgent priority items</small>
+              {loading ? (
+                <div style={{ display: "grid", gap: "0.25rem" }}>
+                  <Skeleton style={{ height: "2.4rem", width: "3rem" }} />
+                  <Skeleton style={{ height: "0.75rem", width: "6.5rem", marginTop: "0.25rem" }} />
+                </div>
+              ) : (
+                <>
+                  <strong className="stat-card__value">{highPriorityTasks}</strong>
+                  <small className="stat-card__description">Urgent priority items</small>
+                </>
+              )}
             </CardContent>
           </Card>
         </section>
@@ -124,68 +171,87 @@ function DashboardLayout({
           </div>
 
           <div className="dashboard-filters">
-            <div className="field dashboard-filters__field dashboard-filters__search">
-              <label className="sr-only" htmlFor="task-search">
-                Search tasks
-              </label>
-              <Input
-                id="task-search"
-                type="search"
-                placeholder="Search tasks..."
-                value={search}
-                onChange={onSearchChange}
-              />
-            </div>
+            {loading ? (
+              <>
+                <div className="field dashboard-filters__field dashboard-filters__search">
+                  <Skeleton style={{ height: "2.5rem", width: "100%" }} />
+                </div>
+                <div className="field dashboard-filters__field">
+                  <Skeleton style={{ height: "2.5rem", width: "100%" }} />
+                </div>
+                <div className="field dashboard-filters__field">
+                  <Skeleton style={{ height: "2.5rem", width: "100%" }} />
+                </div>
+                <div className="field dashboard-filters__field">
+                  <Skeleton style={{ height: "2.5rem", width: "100%" }} />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="field dashboard-filters__field dashboard-filters__search">
+                  <label className="sr-only" htmlFor="task-search">
+                    Search tasks
+                  </label>
+                  <Input
+                    id="task-search"
+                    type="search"
+                    placeholder="Search tasks..."
+                    value={search}
+                    onChange={onSearchChange}
+                  />
+                </div>
 
-            <div className="field dashboard-filters__field">
-              <label className="sr-only" htmlFor="status-filter">
-                Filter by status
-              </label>
-              <Select
-                id="status-filter"
-                value={statusFilter}
-                onChange={onStatusChange}
-              >
-                <option value="all">All</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-              </Select>
-            </div>
+                <div className="field dashboard-filters__field">
+                  <label className="sr-only" htmlFor="status-filter">
+                    Filter by status
+                  </label>
+                  <Select
+                    id="status-filter"
+                    value={statusFilter}
+                    onChange={onStatusChange}
+                  >
+                    <option value="all">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                  </Select>
+                </div>
 
-            <div className="field dashboard-filters__field">
-              <label className="sr-only" htmlFor="priority-filter">
-                Filter by priority
-              </label>
-              <Select
-                id="priority-filter"
-                value={priorityFilter}
-                onChange={onPriorityChange}
-              >
-                <option value="all">All</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </Select>
-            </div>
+                <div className="field dashboard-filters__field">
+                  <label className="sr-only" htmlFor="priority-filter">
+                    Filter by priority
+                  </label>
+                  <Select
+                    id="priority-filter"
+                    value={priorityFilter}
+                    onChange={onPriorityChange}
+                  >
+                    <option value="all">All</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                  </Select>
+                </div>
 
-            <div className="field dashboard-filters__field">
-              <label className="sr-only" htmlFor="sort-tasks">
-                Sort tasks
-              </label>
-              <Select
-                id="sort-tasks"
-                value={sortBy}
-                onChange={onSortChange}
-              >
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-                <option value="due-nearest">Due Date (Nearest First)</option>
-                <option value="due-latest">Due Date (Latest First)</option>
-                <option value="alpha-asc">Alphabetical (A-Z)</option>
-                <option value="alpha-desc">Alphabetical (Z-A)</option>
-              </Select>
-            </div>
+                <div className="field dashboard-filters__field">
+                  <label className="sr-only" htmlFor="sort-tasks">
+                    Sort tasks
+                  </label>
+                  <Select
+                    id="sort-tasks"
+                    value={sortBy}
+                    onChange={onSortChange}
+                  >
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="due-nearest">Due Date (Nearest First)</option>
+                    <option value="due-latest">Due Date (Latest First)</option>
+                    <option value="alpha-asc">Alphabetical (A-Z)</option>
+                    <option value="alpha-desc">Alphabetical (Z-A)</option>
+                  </Select>
+                </div>
+              </>
+            )}
           </div>
         </section>
 

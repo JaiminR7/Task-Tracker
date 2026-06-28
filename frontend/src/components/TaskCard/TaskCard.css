@@ -32,6 +32,8 @@
   font-size: 1.1rem;
   line-height: 1.25;
   color: var(--text-primary);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .task-card__description {
@@ -87,4 +89,11 @@
   .task-card__actions .btn {
     width: 100%;
   }
+}
+
+/* ========================================
+   Dark Mode Overrides
+   ======================================== */
+.dark .task-card:hover {
+  border-color: #1e293b;
 }

@@ -4,6 +4,11 @@ const { Schema } = mongoose;
 
 const taskSchema = new Schema(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'Task must belong to a user'],
+    },
     title: {
       type: String,
       required: [true, 'Title is required'],

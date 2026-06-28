@@ -2,12 +2,28 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const taskRoutes = require('./routes/taskRoutes');
+const authRoutes = require('./routes/authRoutes');
 const notFound = require('./middleware/notFound');
 const errorMiddleware = require('./middleware/errorMiddleware');
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://localhost:5174'
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -19,6 +35,7 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 
 app.use(notFound);
