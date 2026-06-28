@@ -1,0 +1,52 @@
+.shadcn-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.shadcn-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: flex;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.shadcn-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.shadcn-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #f1f5f9;
+}
+
+.shadcn-select-arrow {
+  position: absolute;
+  right: 0.75rem;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.shadcn-select-arrow svg {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.7;
+}
